@@ -10,7 +10,7 @@ React app for Technical Test.
 
 (Buscando evitar empezar desde cero)
 
-1. Sugerencia de arquitectura de la app
+1. Pedí sugerencia de arquitectura de la app
 2. Creación del código de los componentes
 3. Creación de estilos básicos para cada componente y estilos generales con paleta de colores global y armonía entre los estilos
 4. Corrección de errores ortográficos en el README.md
@@ -30,7 +30,7 @@ Cada prompt pasado fue escalonado, para supervisar que en cada uno tuviera en cu
    - Directorio core para api y contemplando la posibilidad de escalar la app con autenticación
    - Directorio layout
 2. Elegí Tailwind sobre css para los estilos
-3. Creé un directorio de layout, para reducir boilerplate y mantener los componentes en una misma section reutilizable (más tarde se puede implementar aquí mismo Navbar, Footer, Sidebar y otros componentes que correspondan al layout de la app)
+3. Creé un directorio de layout, para reducir boilerplate y mantener los componentes en una misma Section reutilizable (más tarde se puede implementar aquí mismo Navbar, Footer, Sidebar y otros componentes que correspondan al layout de la app)
 4. Revisé el resto del código a grosso modo para ver cómo estaba hecha la app. Eliminé comentarios innecesarios, y cambié parte del código enrevesado y difícil de entender para que fuera más legible, a la hora del mantenimiento o revisión.
 
    ***
@@ -70,7 +70,7 @@ Por experiencia sé que resulta una decisión que puede robustecer la app y dism
 ## En cuanto a la arquitectura y el código
 
 1. Robustecer la arquitectura, y lograr mayor abstracción con third party libraries. En este caso los fetching los haría con Tanstack query en lugar del hook useFetch.
-2. Trasladar la forma en que se gestionan las rutas a React Router
+2. Trasladar la forma en que se gestionan las rutas a React Router (Acabé implementando esto finalmente)
 
 ## En general
 
@@ -80,23 +80,27 @@ Por experiencia sé que resulta una decisión que puede robustecer la app y dism
 
 # Arquitectura básica inicialmente escogida, fácilmente escalable.
 
+```text
 src/
 ├── api/
-│ ├── client.ts fetch wrapper: base URL, errores, AbortSignal
-│ ├── users.api.ts getUsers()
-│ └── posts.api.ts getPostsByUser(), createPost()
+│   ├── client.ts              fetch wrapper: base URL, errores, AbortSignal
+│   ├── users.api.ts           getUsers()
+│   └── posts.api.ts           getPostsByUser(), createPost()
 ├── features/
-│ ├── users/
-│ │ ├── components/
-│ │ ├── hooks/useUsers.ts
-│ │ └── types.ts
-│ └── posts/
-│ ├── components/
-│ ├── hooks/usePosts.ts
-│ ├── validation.ts reglas del formulario (función pura)
-│ └── types.ts
-├── shared/components/ Spinner, ErrorMessage, EmptyState
-├── hooks/useDebounce.ts
-├── test/ setup, utilidades de render, mocks
+│   ├── users/
+│   │   ├── components/
+│   │   ├── hooks/useUsers.ts
+│   │   └── types.ts
+│   └── posts/
+│       ├── components/
+│       ├── hooks/usePosts.ts
+│       ├── validation.ts      reglas del formulario (función pura)
+│       └── types.ts
+├── shared/
+│   └── components/            Spinner, ErrorMessage, EmptyState
+├── hooks/
+│   └── useDebounce.ts
+├── test/                      setup, utilidades de render, mocks
 ├── App.tsx
 └── main.tsx
+```
