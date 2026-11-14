@@ -23,7 +23,7 @@ Cada prompt pasado fue escalonado, para supervisar que en cada uno tuviera en cu
 2. Trasladar los estilos completamente a Tailwind. Pues resulta más fácil de mantener y quedan en un solo fichero, junto con el html.
 3. Incorporación de los tests al package.json para poder ejecutar los scripts (Toda la configuración de los tests fue manual)
 4. Instalación y setup de Tailwind (manual)
-5. Instalación y setup de react-router-dom(manual)
+5. Instalación y setup de react-router-dom (manual)
 
 # Qué corregí de la IA
 
@@ -35,21 +35,26 @@ Cada prompt pasado fue escalonado, para supervisar que en cada uno tuviera en cu
 3. Creé un directorio de layout, para reducir boilerplate y mantener los componentes en una misma Section reutilizable (más tarde se puede implementar aquí mismo Navbar, Footer, Sidebar y otros componentes que correspondan al layout de la app)
 4. Revisé el resto del código a grosso modo para ver cómo estaba hecha la app. Eliminé comentarios innecesarios, y cambié parte del código enrevesado y difícil de entender para que fuera más legible, a la hora del mantenimiento o revisión.
 
-   ***
+Un cambio en particular fue el siguiente:
 
-   Un cambio en particular fue el siguiente:
-   En el hook usePosts cambié los parámetros de la función de ser posicionales a ser named params
+En el hook `usePosts` cambié los parámetros de la función de ser posicionales a ser _named params_.
 
-- Antes era:
-  export function usePosts( userId: number) {
-  ...
-  }
-- Después:
-  export function usePosts(params: { userId: number }) {
+**Antes:**
 
+```ts
+export function usePosts(userId: number) {
+  // ...
+}
+```
+
+**Después:**
+
+```ts
+export function usePosts(params: { userId: number }) {
   const { userId } = params;
-  ...
-  }
+  // ...
+}
+```
 
 Por experiencia sé que resulta una decisión que puede robustecer la app y disminuir los errores a la hora del trabajo en equipos de desarrollo.
 
