@@ -50,11 +50,17 @@ export function PostForm({ onSubmit }: PostFormProps) {
   }
 
   return (
-    <form className="post-form" onSubmit={handleSubmit} noValidate>
+    <form
+      className="my-4 rounded-lg border border-(--border) bg-(--surface) p-4"
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <h3>Nueva publicación</h3>
 
-      <div className="field">
-        <label htmlFor={titleId}>Título</label>
+      <div className="mb-3 flex flex-col gap-1">
+        <label htmlFor={titleId} className="text-[0.9rem] font-semibold">
+          Título
+        </label>
         <input
           id={titleId}
           type="text"
@@ -64,14 +70,20 @@ export function PostForm({ onSubmit }: PostFormProps) {
           onChange={(event) => handleChange("title", event.target.value)}
         />
         {errors.title && (
-          <p id={`${titleId}-error`} className="field__error" role="alert">
+          <p
+            id={`${titleId}-error`}
+            className="m-0 text-[0.85rem] text-(--danger)"
+            role="alert"
+          >
             {errors.title}
           </p>
         )}
       </div>
 
-      <div className="field">
-        <label htmlFor={bodyId}>Contenido</label>
+      <div className="mb-3 flex flex-col gap-1">
+        <label htmlFor={bodyId} className="text-[0.9rem] font-semibold">
+          Contenido
+        </label>
         <textarea
           id={bodyId}
           value={values.body}
@@ -80,19 +92,27 @@ export function PostForm({ onSubmit }: PostFormProps) {
           onChange={(event) => handleChange("body", event.target.value)}
         />
         {errors.body && (
-          <p id={`${bodyId}-error`} className="field__error" role="alert">
+          <p
+            id={`${bodyId}-error`}
+            className="m-0 text-[0.85rem] text-(--danger)"
+            role="alert"
+          >
             {errors.body}
           </p>
         )}
       </div>
 
       {submitError && (
-        <p className="field__error" role="alert">
+        <p className="m-0 mb-3 text-[0.85rem] text-(--danger)" role="alert">
           {submitError}
         </p>
       )}
 
-      <button type="submit" className="button" disabled={isSubmitting}>
+      <button
+        type="submit"
+        className="cursor-pointer rounded-md bg-(--accent) px-4 py-2 font-semibold text-(--accent-contrast) disabled:cursor-not-allowed disabled:opacity-60"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? "Publicando…" : "Publicar"}
       </button>
     </form>

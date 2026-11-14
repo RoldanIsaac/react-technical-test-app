@@ -23,6 +23,7 @@ Cada prompt pasado fue escalonado, para supervisar que en cada uno tuviera en cu
 2. Trasladar los estilos completamente a Tailwind. Pues resulta más fácil de mantener y quedan en un solo fichero, junto con el html.
 3. Incorporación de los tests al package.json para poder ejecutar los scripts (Toda la configuración de los tests fue manual)
 4. Instalación y setup de Tailwind (manual)
+5. Instalación y setup de react-router-dom(manual)
 
 # Qué corregí de la IA
 
@@ -72,11 +73,12 @@ Por experiencia sé que resulta una decisión que puede robustecer la app y dism
 ## En cuanto a la arquitectura y el código
 
 1. Robustecer la arquitectura, y lograr mayor abstracción con third party libraries. En este caso los fetching los haría con Tanstack query en lugar del hook useFetch.
-2. Trasladar la forma en que se gestionan las rutas a React Router (Acabé implementando esto finalmente)
+2. Trasladar la forma en que se gestionan las rutas a react-router-dom (Acabé implementando esto finalmente)
+3. Rutas relativas (actualmente los imports están bien, pero cada movimiento de fichero requiere modificar la ruta)
 
 ## En general
 
-1. Logrado el punto de React Router, crearía un landing page para el repo (proyecto) como tal.
+1. Logrado el punto de react-router-dom, crearía un landing page para el repo (proyecto) como tal.
 2. En lo personal, tengo interés por el web performance. Tomaría la app como muestra para hacer comparaciones de desempeño de la página, con diferentes estrategias de fetching, evaluando métricas como DOM content load, optimización de LCP utilizando Chrome Web Tools y otras herramientas afines.
 3. También implementaría algo de accesibilidad, como dark mode, prefers-reduced-motion, etc.
 4. Utilizar un solo idioma (ingles) en nombre de variables, documentacion, comentarios, interfaz e implementar internacionalizacion de ser necesario el espanol. Ahora considero que esta mal (y forma parte de lo hecho por la IA) los textos de interfaz hardcoded en los componentes de interfaz.

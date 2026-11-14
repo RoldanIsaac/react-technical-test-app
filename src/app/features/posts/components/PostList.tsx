@@ -7,7 +7,7 @@ interface PostListProps {
 
 export function PostList({ posts }: PostListProps) {
   return (
-    <ul className="post-list">
+    <ul className="m-0 flex list-none flex-col gap-2 p-0">
       {posts.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}

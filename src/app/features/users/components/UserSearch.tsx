@@ -9,8 +9,10 @@ export function UserSearch({ value, onChange }: UserSearchProps) {
   const id = useId();
 
   return (
-    <div className="field">
-      <label htmlFor={id}>Buscar usuario</label>
+    <div className="mb-3 flex flex-col gap-1">
+      <label htmlFor={id} className="text-[0.9rem] font-semibold">
+        Buscar usuario
+      </label>
       <input
         id={id}
         type="search"

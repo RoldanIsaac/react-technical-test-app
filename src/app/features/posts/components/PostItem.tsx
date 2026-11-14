@@ -6,9 +6,9 @@ interface PostItemProps {
 
 export function PostItem({ post }: PostItemProps) {
   return (
-    <li className="post-item">
-      <h3>{post.title}</h3>
-      <p>{post.body}</p>
+    <li className="rounded-lg border border-(--border) bg-(--surface) p-4">
+      <h3 className="text-base">{post.title}</h3>
+      <p className="m-0 text-(--muted)">{post.body}</p>
     </li>
   );
 }

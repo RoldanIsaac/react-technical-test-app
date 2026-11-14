@@ -9,7 +9,7 @@ interface UserListProps {
 
 export function UserList({ users, selectedUserId, onSelect }: UserListProps) {
   return (
-    <ul className="user-list">
+    <ul className="m-0 flex list-none flex-col gap-2 p-0">
       {users.map((user) => (
         <UserListItem
           key={user.id}
