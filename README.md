@@ -22,6 +22,7 @@ Cada prompt pasado fue escalonado, para supervisar que en cada uno tuviera en cu
 1. Escoger una arquitectura básica y fácilmente escalable. Buscando sobre todo fácil manejo del directory tree y los ficheros.
 2. Trasladar los estilos completamente a Tailwind. Pues resulta más fácil de mantener y quedan en un solo fichero, junto con el html.
 3. Incorporación de los tests al package.json para poder ejecutar los scripts (Toda la configuración de los tests fue manual)
+4. Instalación y setup de Tailwind (manual)
 
 # Qué corregí de la IA
 
@@ -66,6 +67,7 @@ Por experiencia sé que resulta una decisión que puede robustecer la app y dism
     - Modificaciones de UI para hacerla más intuitiva
 2.  Importante: Dedicaría un tiempo al responsiveness.
 3.  Tal vez animaría un poco más la página. Instalaría Framer Motion para lograr una mejor experiencia de usuario
+4.  Infinite loading en la lista de usuarios y posts
 
 ## En cuanto a la arquitectura y el código
 
