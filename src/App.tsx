@@ -1,122 +1,63 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { UserPostsPanel } from "./app/features/posts/components/UserPostsPanel";
+import { useCreatedPosts } from "./app/features/posts/hooks/useCreatedPosts";
+import { UserList } from "./app/features/users/components/UserList";
+import { UserSearch } from "./app/features/users/components/UserSearch";
+import { useUsers } from "./app/features/users/hooks/useUsers";
+import { useDebounce } from "./app/hooks/useDebounce";
+import { EmptyState } from "./app/shared/components/EmptyState";
+import { ErrorMessage } from "./app/shared/components/ErrorMessage";
+import { LoadingSpinner } from "./app/shared/components/LoadingSpinner";
+import { filterUsersByName } from "./app/features/users/utils/filterUsers";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { users, isLoading, error, retry } = useUsers();
+  const { createdPosts, addCreatedPost } = useCreatedPosts();
+  const [query, setQuery] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const debouncedQuery = useDebounce(query);
+
+  const visibleUsers = filterUsersByName(users, debouncedQuery);
+  const selectedUser = users.find((user) => user.id === selectedUserId) ?? null;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app">
+      <header className="app__header">
+        <h1>Usuarios y publicaciones</h1>
+      </header>
 
-      <div className="ticks"></div>
+      <aside className="app__sidebar">
+        <UserSearch value={query} onChange={setQuery} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {isLoading && <LoadingSpinner label="Cargando usuarios…" />}
+        {error && <ErrorMessage message={error} onRetry={retry} />}
+        {!isLoading &&
+          !error &&
+          (visibleUsers.length > 0 ? (
+            <UserList
+              users={visibleUsers}
+              selectedUserId={selectedUserId}
+              onSelect={(user) => setSelectedUserId(user.id)}
+            />
+          ) : (
+            <EmptyState message="No hay usuarios que coincidan con la búsqueda." />
+          ))}
+      </aside>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <main className="app__content">
+        {selectedUser ? (
+          <UserPostsPanel
+            key={selectedUser.id}
+            user={selectedUser}
+            createdPosts={createdPosts.filter(
+              (post) => post.userId === selectedUser.id,
+            )}
+            onPostCreated={addCreatedPost}
+          />
+        ) : (
+          <EmptyState message="Selecciona un usuario para ver sus publicaciones." />
+        )}
+      </main>
+    </div>
+  );
 }
-
-export default App
