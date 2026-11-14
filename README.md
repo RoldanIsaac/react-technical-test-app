@@ -79,6 +79,7 @@ Por experiencia sé que resulta una decisión que puede robustecer la app y dism
 1. Logrado el punto de React Router, crearía un landing page para el repo (proyecto) como tal.
 2. En lo personal, tengo interés por el web performance. Tomaría la app como muestra para hacer comparaciones de desempeño de la página, con diferentes estrategias de fetching, evaluando métricas como DOM content load, optimización de LCP utilizando Chrome Web Tools y otras herramientas afines.
 3. También implementaría algo de accesibilidad, como dark mode, prefers-reduced-motion, etc.
+4. Utilizar un solo idioma (ingles) en nombre de variables, documentacion, comentarios, interfaz e implementar internacionalizacion de ser necesario el espanol. Ahora considero que esta mal (y forma parte de lo hecho por la IA) los textos de interfaz hardcoded en los componentes de interfaz.
 
 # Arquitectura básica inicialmente escogida, fácilmente escalable.
 
